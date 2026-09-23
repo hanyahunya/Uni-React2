@@ -23,41 +23,6 @@ npm run dev
 | `npm run start` | 빌드된 애플리케이션 실행 |
 | `npm run lint` | 코드 규칙 검사 |
 
-## 2026.09.09 - Next.js 프로젝트 시작하기
-
-### 프로젝트 구성
-
-`create-next-app`을 사용하면 TypeScript, ESLint, Tailwind CSS, App Router 등의 설정을 한 번에 구성할 수 있다. 이 저장소는 다음 옵션을 기준으로 생성했다.
-
-- TypeScript 사용
-- ESLint 사용
-- App Router 사용
-- 소스 코드를 `src` 폴더에 배치
-- `@/*` import 별칭 사용
-
-정적 이미지나 글꼴처럼 그대로 제공할 파일은 `public`에 둔다. 예를 들어 `public/profile.png`는 화면에서 `/profile.png` 경로로 접근할 수 있다.
-
-### 주요 파일과 폴더
-
-| 경로 | 역할 |
-| --- | --- |
-| `src/app/layout.tsx` | 여러 페이지가 공유하는 최상위 레이아웃 |
-| `src/app/page.tsx` | `/` 주소에 표시되는 페이지 |
-| `src/app/globals.css` | 애플리케이션 전체에 적용되는 스타일 |
-| `public/` | 이미지 등의 정적 파일 |
-| `package.json` | 의존성과 실행 스크립트 관리 |
-| `tsconfig.json` | TypeScript 및 경로 별칭 설정 |
-
-App Router에서는 폴더가 URL 구간을 나타내고, 그 폴더 안에 `page.tsx`가 있어야 실제로 접근할 수 있는 페이지가 된다. `layout.tsx`는 하위 페이지 사이에서 공통 UI를 유지할 때 사용한다.
-
-### 경로 별칭
-
-이 프로젝트의 `tsconfig.json`에는 `@/*`가 `./src/*`를 가리키도록 설정되어 있다. 따라서 깊은 상대 경로 대신 아래처럼 작성할 수 있다.
-
-```tsx
-import Button from "@/components/Button";
-```
-
 ## 2026.09.16 - 라우팅과 프로젝트 구성
 
 ### 동적 세그먼트
@@ -93,6 +58,41 @@ import Button from "@/components/Button";
 | `page.tsx` | 해당 경로의 실제 페이지 |
 
 `layout.tsx`는 페이지 이동 중에도 상태와 DOM을 유지하는 데 적합하고, `template.tsx`는 이동할 때마다 상태를 초기화해야 하는 경우에 적합하다.
+
+## 2026.09.09 - Next.js 프로젝트 시작하기
+
+### 프로젝트 구성
+
+`create-next-app`을 사용하면 TypeScript, ESLint, Tailwind CSS, App Router 등의 설정을 한 번에 구성할 수 있다. 이 저장소는 다음 옵션을 기준으로 생성했다.
+
+- TypeScript 사용
+- ESLint 사용
+- App Router 사용
+- 소스 코드를 `src` 폴더에 배치
+- `@/*` import 별칭 사용
+
+정적 이미지나 글꼴처럼 그대로 제공할 파일은 `public`에 둔다. 예를 들어 `public/profile.png`는 화면에서 `/profile.png` 경로로 접근할 수 있다.
+
+### 주요 파일과 폴더
+
+| 경로 | 역할 |
+| --- | --- |
+| `src/app/layout.tsx` | 여러 페이지가 공유하는 최상위 레이아웃 |
+| `src/app/page.tsx` | `/` 주소에 표시되는 페이지 |
+| `src/app/globals.css` | 애플리케이션 전체에 적용되는 스타일 |
+| `public/` | 이미지 등의 정적 파일 |
+| `package.json` | 의존성과 실행 스크립트 관리 |
+| `tsconfig.json` | TypeScript 및 경로 별칭 설정 |
+
+App Router에서는 폴더가 URL 구간을 나타내고, 그 폴더 안에 `page.tsx`가 있어야 실제로 접근할 수 있는 페이지가 된다. `layout.tsx`는 하위 페이지 사이에서 공통 UI를 유지할 때 사용한다.
+
+### 경로 별칭
+
+이 프로젝트의 `tsconfig.json`에는 `@/*`가 `./src/*`를 가리키도록 설정되어 있다. 따라서 깊은 상대 경로 대신 아래처럼 작성할 수 있다.
+
+```tsx
+import Button from "@/components/Button";
+```
 
 ## 참고 자료
 
