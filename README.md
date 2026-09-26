@@ -4,8 +4,9 @@ React2 수업에서 진행한 Next.js 실습과 학습 내용을 기록하는 �
 
 ## 학습 목차
 
-- [2026.09.09 - Next.js 프로젝트 시작하기](#20260909---nextjs-프로젝트-시작하기)
+- [2026.09.23 - 다음 진도: 페이지와 레이아웃](#20260923---다음-진도-페이지와-레이아웃)
 - [2026.09.16 - 라우팅과 프로젝트 구성](#20260916---라우팅과-프로젝트-구성)
+- [2026.09.09 - Next.js 프로젝트 시작하기](#20260909---nextjs-프로젝트-시작하기)
 
 ## 실행 방법
 
@@ -22,6 +23,50 @@ npm run dev
 | `npm run build` | 배포용 결과물 생성 |
 | `npm run start` | 빌드된 애플리케이션 실행 |
 | `npm run lint` | 코드 규칙 검사 |
+
+## 2026.09.23 - 다음 진도: 페이지와 레이아웃
+
+9월 16일 다음 수요일인 9월 23일 항목이다. 공식 문서의 [Layouts and Pages](https://nextjs.org/docs/app/getting-started/layouts-and-pages)를 기준으로 정리했으며, 실제 수업 내용과 차이가 있으면 갱신한다.
+
+### 페이지 만들기
+
+`src/app` 안의 폴더는 URL 경로를 나타내고, 그 안에 `page.tsx`를 만들면 해당 주소에 화면이 표시된다. 예를 들어 `src/app/blog/page.tsx`는 `/blog` 페이지다. 페이지 파일은 화면을 그리는 React 컴포넌트를 기본 내보내기(`export default`)로 제공한다.
+
+```tsx
+// src/app/blog/page.tsx
+export default function BlogPage() {
+  return <h1>블로그</h1>;
+}
+```
+
+### 레이아웃 중첩하기
+
+최상위 `src/app/layout.tsx`는 모든 페이지를 감싸며, `<html>`과 `<body>`를 포함해야 한다. 특정 경로에만 공통 UI가 필요하면 그 폴더에 별도의 `layout.tsx`를 둔다. 예를 들어 `src/app/blog/layout.tsx`는 블로그의 목록과 상세 페이지를 함께 감싼다. 레이아웃은 `children`으로 하위 페이지나 레이아웃을 받으며, 같은 레이아웃 안에서 이동할 때 상태를 유지한다.
+
+```tsx
+// src/app/blog/layout.tsx
+export default function BlogLayout({ children }: { children: React.ReactNode }) {
+  return <section>{children}</section>;
+}
+```
+
+### URL 값 사용하기
+
+앞서 배운 `[slug]` 폴더를 실제 페이지에 적용할 때는 `params`에서 값을 읽는다. 현재 Next.js 문서의 서버 컴포넌트 예시에서는 `params`가 Promise이므로 `await` 후 사용한다. `?category=react`처럼 물음표 뒤에 붙는 쿼리 값은 페이지의 `searchParams`로 읽을 수 있으며, 이 값도 `await`가 필요하다.
+
+### 페이지 연결하기
+
+내부 페이지 사이를 이동할 때는 `next/link`의 `Link` 컴포넌트를 사용한다.
+
+```tsx
+import Link from "next/link";
+
+export default function HomePage() {
+  return <Link href="/blog">블로그 보기</Link>;
+}
+```
+
+`Link`는 필요한 페이지를 미리 가져오거나 클라이언트에서 페이지를 전환하는 기능을 제공한다. 자세한 탐색 최적화는 다음 장인 [Linking and Navigating](https://nextjs.org/docs/app/getting-started/linking-and-navigating)에서 다룬다.
 
 ## 2026.09.16 - 라우팅과 프로젝트 구성
 
@@ -98,4 +143,5 @@ import Button from "@/components/Button";
 
 - [Next.js App Router 시작하기](https://nextjs.org/docs/app/getting-started)
 - [Next.js 프로젝트 구조](https://nextjs.org/docs/app/getting-started/project-structure)
+- [Next.js 페이지와 레이아웃](https://nextjs.org/docs/app/getting-started/layouts-and-pages)
 - [Next.js 동적 세그먼트](https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes)
